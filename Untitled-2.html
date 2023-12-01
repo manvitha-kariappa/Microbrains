@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+  background-image: url('re1.jpg');
+  background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+}
+h1{
+color:black;
+text-align:center;
+font-size:50px;
+font-family:courier new;
+}
+button{
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+startRecording {background-color: #04AA6D;} 
+stopRecording {background-color: #008CBA;}
+
+</style>
+
+<head>
+    <title>Speech-to-Text Translation</title>
+</head>
+<body>
+    <h1>Speech-to-Text Translation</h1>
+    <button onclick="startRecording()">Start Recording</button>
+    <button onclick="stopRecording()">Stop Recording</button>
+    <div id="result"></div>
+
+    <script>
+        function startRecording() {
+            const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+            recognition.lang = 'en-US'; 
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('result').innerHTML = transcript;
+               
+            }
+            
+            recognition.start();
+        }
+
+        function stopRecording() {
+            recognition.stop();
+        }
+    </script>
+</body>
+</html>
